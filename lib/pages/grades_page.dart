@@ -1,22 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:tpi_flutter/pages/grades_values_page.dart';
 
-final List<String> _titles = [
-  'Analisis Matematico',
-  'Algebra y Geometria Analitica',
-  'Algoritmos y Estructuras de Datos',
-  'Metodologia de Sistemas',
-  'Sistema de Procesamiento de Datos',
-  'Diseño de Bases de Datos',
+final List<Map> _titles = [
+  {
+    'materia': 'Analisis Matematico',
+    'notas': [
+      {
+        'instancia': 'parcial 1',
+        'nota': '8',
+      },
+      {
+        'instancia': 'parcial 2',
+        'nota': '9',
+      },
+      {
+        'instancia': 'parcial 3',
+        'nota': '10',
+      }
+    ]
+  },
+  {
+    'materia': 'Algebra y Geometria Analitica',
+    'notas': [
+      {
+        'instancia': 'parcial 1',
+        'nota': '8',
+      },
+      {
+        'instancia': 'parcial 2',
+        'nota': '9',
+      },
+      {
+        'instancia': 'parcial 3',
+        'nota': '10',
+      }
+    ]
+  },
+  {
+    'materia': 'Analisis Matematico',
+    'notas': [
+      {
+        'instancia': 'parcial 1',
+        'nota': '8',
+      },
+      {
+        'instancia': 'parcial 2',
+        'nota': '9',
+      },
+      {
+        'instancia': 'parcial 3',
+        'nota': '10',
+      }
+    ]
+  }
 ];
-
-final Map<String, int> _grades = {
-  'Parcial 1': 8,
-  'Parcial 2': 3,
-  'Parcial 3': 10,
-  'Recuperatorio 2': 7,
-  'Trabajo Practico Integrador': 8,
-  'Trabajos Practicos': 9,
-};
 
 class GradesPage extends StatelessWidget {
   const GradesPage({Key? key}) : super(key: key);
@@ -26,16 +63,21 @@ class GradesPage extends StatelessWidget {
     return ListView.builder(
       itemCount: _titles.length,
       itemBuilder: (context, index) {
-        String abbreviation = _getAbbreviation(_titles[index]);
+        String abbreviation = _getAbbreviation(_titles[index]['materia']);
         return Card(
           elevation: 3,
           child: ListTile(
+            tileColor: Colors.white,
+            minVerticalPadding: 20,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
             title: Text(
+              _titles[index]['materia'],
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
-              _titles[index],
             ),
             leading: Hero(
               tag: index,
@@ -53,60 +95,14 @@ class GradesPage extends StatelessWidget {
             ),
             onTap: () => {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => SecondPage(heroTag: index)))
+                  builder: (context) => SecondPage(
+                        heroTag: _titles[index]['materia'],
+                        grades: _titles[index]['notas'],
+                      )))
             },
           ),
         );
       },
-    );
-  }
-}
-
-class SecondPage extends StatelessWidget {
-  final int heroTag;
-  const SecondPage({required this.heroTag});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(_titles[heroTag])),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 100,
-            width: double.infinity,
-            child: Center(
-              child: Hero(
-                tag: heroTag,
-                child: CircleAvatar(
-                  child: Text(_getAbbreviation(_titles[heroTag])),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: _grades.length,
-              itemBuilder: (context, index) {
-                String key = _grades.keys.elementAt(index);
-                int value = _grades.values.elementAt(index);
-                return Card(
-                  child: ListTile(
-                    title: Text(
-                      key,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    trailing: Text(
-                      value.toString(),
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  ),
-                );
-              },
-            ),
-          )
-        ],
-      ),
     );
   }
 }

@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
 
-final List<String> _titles = [
-  'Analisis Matematico',
-  'Algebra y Geometria Analitica',
-  'Algoritmos y Estructuras de Datos',
-  'Metodologia de Sistemas',
+final List<Map> _titles = [
+  {
+    'nombre': 'Analisis Matematico',
+    'aula': '101',
+    'horario': '8:00 - 10:00',
+    'profesor': 'Juan Perez',
+  },
+  {
+    'nombre': 'Algebra y Geometria Analitica',
+    'aula': '102',
+    'horario': '10:00 - 12:00',
+    'profesor': 'Maria Rodriguez',
+  },
+  {
+    'nombre': 'Algoritmos y Estructuras de Datos',
+    'aula': '103',
+    'horario': '14:00 - 16:00',
+    'profesor': 'Pedro Martinez',
+  },
+  {
+    'nombre': 'Metodologia de Sistemas',
+    'aula': '104',
+    'horario': '16:00 - 18:00',
+    'profesor': 'Ana Fernandez',
+  },
 ];
 
 class SchedulesPage extends StatefulWidget {
@@ -21,56 +41,70 @@ class _SchedulesPageState extends State<SchedulesPage> {
       itemCount: _titles.length,
       itemBuilder: (context, index) {
         return SizedBox(
-          child: Card(
-            child: ListTile(
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    _titles[index],
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Text(
-                          'Aula 101',
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          '8:00 - 10:00',
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 3,
-                        child: Text(
-                          'Profesor: Juan Perez',
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ],
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
                   ),
                 ],
               ),
-              onTap: () {},
+              child: ListTile(
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _titles[index]['nombre'],
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            'Aula ${_titles[index]['aula']}',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Text(
+                            _titles[index]['horario'],
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 0,
+                          child: Text(
+                            _titles[index]['profesor'],
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                onTap: () {},
+              ),
             ),
           ),
         );
