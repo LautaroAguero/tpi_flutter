@@ -9,12 +9,68 @@ final List<Map> _titles = [
     'estudiantes': [
       {
         'nombre': 'Matias Virgona',
+        'notas': [
+          {
+            'instancia': 'parcial',
+            'numero': '1',
+            'nota': '8',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '2',
+            'nota': '9',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '3',
+            'nota': '9',
+          },
+        ]
       },
       {
         'nombre': 'Lautaro Agujero',
+        'notas': [
+          {
+            'instancia': 'parcial',
+            'numero': '1',
+            'nota': '8',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '2',
+            'nota': '3',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '3',
+            'nota': '10',
+          },
+          {
+            'instancia': 'recuperatorio',
+            'numero': '1',
+            'nota': '9',
+          },
+        ]
       },
       {
         'nombre': 'Elias Gomez',
+        'notas': [
+          {
+            'instancia': 'parcial',
+            'numero': '1',
+            'nota': '2',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '2',
+            'nota': '2',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '3',
+            'nota': '2',
+          }
+        ]
       },
     ]
   },
@@ -25,12 +81,78 @@ final List<Map> _titles = [
     'estudiantes': [
       {
         'nombre': 'Lucia Fernandez',
+        'notas': [
+          {
+            'instancia': 'parcial',
+            'numero': '1',
+            'nota': '8',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '2',
+            'nota': '9',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '3',
+            'nota': '5',
+          },
+          {
+            'instancia': 'recuperatorio',
+            'numero': '1',
+            'nota': '',
+          },
+          {
+            'instancia': 'recuperatorio',
+            'numero': '2',
+            'nota': '',
+          },
+          {
+            'instancia': 'recuperatorio',
+            'numero': '3',
+            'nota': '9',
+          }
+        ]
       },
       {
         'nombre': 'Juan Perez',
+        'notas': [
+          {
+            'instancia': 'parcial',
+            'numero': '1',
+            'nota': '8',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '2',
+            'nota': '9',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '3',
+            'nota': '10',
+          }
+        ]
       },
       {
         'nombre': 'Maria Rodriguez',
+        'notas': [
+          {
+            'instancia': 'parcial',
+            'numero': '1',
+            'nota': '8',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '2',
+            'nota': '9',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '3',
+            'nota': '10',
+          }
+        ]
       },
     ]
   },
@@ -41,12 +163,63 @@ final List<Map> _titles = [
     'estudiantes': [
       {
         'nombre': 'Pedro Martinez',
+        'notas': [
+          {
+            'instancia': 'parcial',
+            'numero': '1',
+            'nota': '8',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '2',
+            'nota': '9',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '3',
+            'nota': '10',
+          }
+        ]
       },
       {
         'nombre': 'Ana Fernandez',
+        'notas': [
+          {
+            'instancia': 'parcial',
+            'numero': '1',
+            'nota': '8',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '2',
+            'nota': '9',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '3',
+            'nota': '10',
+          }
+        ]
       },
       {
         'nombre': 'Sofia Garcia',
+        'notas': [
+          {
+            'instancia': 'parcial',
+            'numero': '1',
+            'nota': '8',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '2',
+            'nota': '9',
+          },
+          {
+            'instancia': 'parcial',
+            'numero': '3',
+            'nota': '10',
+          }
+        ]
       },
     ]
   },
@@ -87,31 +260,34 @@ class SubjectPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
-                          flex: 1,
-                          child: Text(
-                            'Aula ${_titles[index]['aula']}',
-                            style: TextStyle(
-                              color: Colors.black,
+                        Row(
+                          children: [
+                            FittedBox(
+                              child: Text(
+                                'Aula ${_titles[index]['aula']}',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Text(
-                            _titles[index]['horario'],
-                            style: TextStyle(
-                              color: Colors.black,
+                            SizedBox(
+                              width: 10,
                             ),
-                          ),
+                            FittedBox(
+                              child: Text(
+                                _titles[index]['horario'],
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         Flexible(
-                          flex: 0,
+                          flex: 1,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Theme.of(context)

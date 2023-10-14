@@ -6,15 +6,18 @@ final List<Map> _titles = [
     'materia': 'Analisis Matematico',
     'notas': [
       {
-        'instancia': 'parcial 1',
+        'instancia': 'parcial',
+        'numero': '1',
         'nota': '8',
       },
       {
-        'instancia': 'parcial 2',
+        'instancia': 'parcial',
+        'numero': '2',
         'nota': '9',
       },
       {
-        'instancia': 'parcial 3',
+        'instancia': 'parcial',
+        'numero': '3',
         'nota': '10',
       }
     ]
@@ -23,15 +26,18 @@ final List<Map> _titles = [
     'materia': 'Algebra y Geometria Analitica',
     'notas': [
       {
-        'instancia': 'parcial 1',
+        'instancia': 'parcial',
+        'numero': '1',
         'nota': '8',
       },
       {
-        'instancia': 'parcial 2',
+        'instancia': 'parcial',
+        'numero': '2',
         'nota': '9',
       },
       {
-        'instancia': 'parcial 3',
+        'instancia': 'parcial',
+        'numero': '3',
         'nota': '10',
       }
     ]
@@ -40,15 +46,18 @@ final List<Map> _titles = [
     'materia': 'Analisis Matematico',
     'notas': [
       {
-        'instancia': 'parcial 1',
+        'instancia': 'parcial',
+        'numero': '1',
         'nota': '8',
       },
       {
-        'instancia': 'parcial 2',
+        'instancia': 'parcial',
+        'numero': '2',
         'nota': '9',
       },
       {
-        'instancia': 'parcial 3',
+        'instancia': 'parcial',
+        'numero': '3',
         'nota': '10',
       }
     ]
@@ -95,7 +104,7 @@ class GradesPage extends StatelessWidget {
             ),
             onTap: () => {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => SecondPage(
+                  builder: (context) => GradesValuesPage(
                         heroTag: _titles[index]['materia'],
                         grades: _titles[index]['notas'],
                       )))

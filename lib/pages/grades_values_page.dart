@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class SecondPage extends StatelessWidget {
+class GradesValuesPage extends StatelessWidget {
   final String heroTag;
   final List<Map> grades;
-  const SecondPage({required this.heroTag, required this.grades});
+  const GradesValuesPage({required this.heroTag, required this.grades});
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +30,11 @@ class SecondPage extends StatelessWidget {
                 return Card(
                   child: ListTile(
                     title: Text(
-                      grades[index]['instancia'],
+                      '${grades[index]['instancia']} ${grades[index]['numero']}}',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     trailing: Text(
-                      grades[index]['nota'],
+                      '${grades[index]['nota']}',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
