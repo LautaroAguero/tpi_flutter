@@ -20,11 +20,11 @@ class _StudentListPageState extends State<StudentListPage> {
       ),
       body: ListView(
         children: [
+          _createEditButton(),
           _createDataTable(),
           SizedBox(
             height: 10,
           ),
-          _createCheckboxField()
         ],
       ),
     );
@@ -49,7 +49,6 @@ class _StudentListPageState extends State<StudentListPage> {
 
     if (widget.students.isNotEmpty) {
       List<Map> grades = getLongestNotes(widget.students);
-
       for (var grade in grades) {
         columns.add(DataColumn(
             label: Text('${grade['instancia']} ${grade['numero']}')));
@@ -60,29 +59,38 @@ class _StudentListPageState extends State<StudentListPage> {
 
   List<DataRow> _generateRows() {
     int order = 1;
-    return widget.students.map((student) {
+    return widget.students.asMap().entries.map((entry) {
+      int studentIndex = entry.key;
+      Map student = entry.value;
       List<DataCell> cells = [
         DataCell(Text('${order++}')),
         DataCell(Text(student['nombre'])),
       ];
-      for (var nota in student['notas']) {
-        cells.add(_createNoteCell(nota['nota']));
+      for (var noteIndex = 0;
+          noteIndex < student['notas'].length;
+          noteIndex++) {
+        cells.add(_createNoteCell(
+          student['notas'][noteIndex]['nota'],
+          studentIndex,
+          noteIndex,
+        ));
       }
       while (cells.length < _generateColumns().length) {
-        cells.add(_createNoteCell(Text(' ').data));
+        cells.add(_createNoteCell(Text('').data, studentIndex, 0));
       }
       return DataRow(cells: cells);
     }).toList();
   }
 
-  DataCell _createNoteCell(note) {
+  DataCell _createNoteCell(note, int studentIndex, int noteIndex) {
     TextEditingController controller = TextEditingController(text: note);
     return DataCell(_isEditMode == true
         ? TextFormField(
             controller: controller,
             onFieldSubmitted: (value) {
               setState(() {
-                note = value;
+                widget.students[studentIndex]['notas'][noteIndex]['nota'] =
+                    value;
                 controller.text = value;
               });
             },
@@ -90,18 +98,31 @@ class _StudentListPageState extends State<StudentListPage> {
         : Text(note));
   }
 
-  Row _createCheckboxField() {
+  Row _createEditButton() {
     return Row(
       children: [
-        Checkbox(
-          value: _isEditMode,
-          onChanged: (value) => {
-            setState(
-              () => _isEditMode = value,
-            )
-          },
+        SizedBox(width: 10),
+        CircleAvatar(
+          backgroundColor: Colors.grey[300],
+          radius: 30,
+          child: IconButton(
+            icon: Icon(Icons.edit),
+            iconSize: 30,
+            onPressed: () {
+              setState(() {
+                if (_isEditMode != null && _isEditMode == true) {
+                  _isEditMode = false;
+                } else {
+                  _isEditMode = true;
+                }
+              });
+            },
+          ),
         ),
-        Text('Edit Mode')
+        SizedBox(
+          width: 10,
+        ),
+        Text('Modificar Notas')
       ],
     );
   }
