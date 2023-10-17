@@ -161,7 +161,7 @@ List<Map> getLongestNotes(List<Map> list) {
 _submitForm(BuildContext context) async {
   await Future.delayed(Duration(seconds: 1));
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    content: Text('Cargado correctamente'),
+    content: Text('Notas editadas correctamente'),
     backgroundColor: Colors.green,
   ));
 }

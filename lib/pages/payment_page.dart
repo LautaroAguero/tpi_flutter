@@ -169,7 +169,7 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   _submitForm(BuildContext context) async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text('Cargado correctamente'),
       backgroundColor: Colors.green,
