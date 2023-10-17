@@ -1,14 +1,52 @@
+
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tpi_flutter/main.dart';
+import 'package:http/http.dart' as http;
+import 'package:tpi_flutter/models/user.dart';
 
-class PaymentPage extends StatefulWidget {
-  const PaymentPage({super.key});
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<PaymentPage> createState() => _PaymentPageState();
+  State<LoginPage> createState() => _LoginPage();
 }
+class _LoginPage extends State<LoginPage> {
 
-class _PaymentPageState extends State<PaymentPage> {
+  Future<User?> signUserIn() async {
+    final response = await http
+      .post(Uri.parse('https://tpi-metodologia-grupo-3-2023.onrender.com/login'),
+          headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'email': 'jeremias4@gmail.com',
+        'password': '123456'
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      print(User.fromJson(jsonDecode(response.body)));
+      return User.fromJson(jsonDecode(response.body));
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load login');
+    }
+  }
+  // Navigator.pushReplacement(
+  //   context,
+  //   MaterialPageRoute(
+  //     builder: (context) => MyHomePage(),
+  //   ),
+  // );
+  //llamada a backend
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,102 +72,74 @@ class _PaymentPageState extends State<PaymentPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.payment,
-                          size: 50,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        SizedBox(width: 10),
                         Text(
-                          'Nuevo Pago',
+                          'Iniciar Sesion',
                           style: Theme.of(context).textTheme.headlineLarge,
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Selecciona Metodo de pago',
-                            style: Theme.of(context).textTheme.bodyMedium),
-                        SizedBox(width: 10),
-                        DropdownMenu()
-                      ],
-                    ),
+                    SizedBox(height: 60),
+                
                     TextFormField(
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'N° de Comprobante'),
-                      keyboardType: TextInputType.number,
+                          labelText: 'Email'),
+                      keyboardType: TextInputType.emailAddress,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    ), 
+                    const SizedBox(height: 20),
+
+                    TextFormField(
+                      obscureText: true,
+
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Contraseña',
+                      ),
+                      keyboardType: TextInputType.visiblePassword,
                     ),
+                
+                    const SizedBox(height: 10),
+
+                    // forgot password?
                     Padding(
-                      padding: EdgeInsets.only(top: 20),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(), labelText: 'Monto'),
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            '¿Olvidó su contraseña?',
+                            style: TextStyle(color: Colors.grey[600]),
+                          ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Text('Adjuntar Comprobante',
-                        style: Theme.of(context).textTheme.bodyMedium),
-                    SizedBox(height: 10),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: CircleBorder(),
-                        padding: EdgeInsets.all(20),
-                        backgroundColor: Theme.of(context)
-                            .colorScheme
-                            .background
-                            .withOpacity(0.6),
-                        foregroundColor: Theme.of(context)
-                            .colorScheme
-                            .onBackground
-                            .withOpacity(0.2),
-                      ),
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.picture_as_pdf,
-                        size: 50,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: FittedBox(
-                          child: Card(
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                            color: Theme.of(context).colorScheme.error,
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
+
+                    const SizedBox(height: 25),
+
+                    // sign in button
+                    GestureDetector(
+                      onTap: signUserIn,
+                      child: Container(
+                        padding: const EdgeInsets.all(25),
+                        margin: const EdgeInsets.symmetric(horizontal: 25),
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                size: 40,
-                                Icons.warning,
-                                color: Colors.redAccent,
-                              ),
-                              SizedBox(width: 10),
-                              Text(
-                                'Los pagos en efectivo se realizan en la tesoreria de la facultad',
-                                style:
-                                    Theme.of(context).textTheme.headlineLarge,
-                              ),
-                            ],
+                        child: const Center(
+                          child: Text(
+                            "Iniciar Sesion",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
-                      )),
+                      ),
                     ),
+
                   ],
                 ),
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tpi_flutter/pages/grades_page.dart';
+import 'package:tpi_flutter/pages/login_page.dart';
 import 'package:tpi_flutter/pages/managment_page.dart';
 import 'package:tpi_flutter/pages/payment_page.dart';
 import 'package:tpi_flutter/pages/schedules_pages.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Color(0x00234262)),
         ),
-        home: MyHomePage(),
+        home: LoginPage(),
       ),
     );
   }
