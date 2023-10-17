@@ -1,12 +1,10 @@
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:tpi_flutter/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:tpi_flutter/models/user.dart';
-
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,12 +12,12 @@ class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPage();
 }
-class _LoginPage extends State<LoginPage> {
 
+class _LoginPage extends State<LoginPage> {
   Future<User?> signUserIn() async {
-    final response = await http
-      .post(Uri.parse('https://tpi-metodologia-grupo-3-2023.onrender.com/login'),
-          headers: <String, String>{
+    final response = await http.post(
+      Uri.parse('https://tpi-metodologia-grupo-3-2023.onrender.com/login'),
+      headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
@@ -40,21 +38,19 @@ class _LoginPage extends State<LoginPage> {
         ),
       );
       return User.fromJson(jsonDecode(response.body));
-      
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       throw Exception('Failed to load login');
     }
   }
- 
+
   //llamada a backend
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Theme.of(context).colorScheme.background.withOpacity(0.1),
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
         child: Card(
           elevation: 0,
@@ -82,118 +78,50 @@ class _LoginPage extends State<LoginPage> {
                       ],
                     ),
                     SizedBox(height: 60),
-                
+
                     TextFormField(
                       decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Email'),
+                          border: OutlineInputBorder(), labelText: 'Email'),
                       keyboardType: TextInputType.emailAddress,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    ), 
+                    ),
                     const SizedBox(height: 20),
 
                     TextFormField(
                       obscureText: true,
-
                       decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Contraseña',
+                        border: OutlineInputBorder(),
+                        labelText: 'Contraseña',
                       ),
                       keyboardType: TextInputType.visiblePassword,
                     ),
-                
+
                     const SizedBox(height: 10),
 
-                    // forgot password?
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            '¿Olvidó su contraseña?',
-                            style: TextStyle(color: Colors.grey[600]),
-                          ),
-                        ],
-                      ),
-                    ),
-
                     const SizedBox(height: 25),
-
                     // sign in button
-                    GestureDetector(
-                      onTap: signUserIn,
-                      child: Container(
-                        padding: const EdgeInsets.all(25),
-                        margin: const EdgeInsets.symmetric(horizontal: 25),
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            "Iniciar Sesion",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
+                    ElevatedButton(
+                      onPressed: signUserIn,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        minimumSize: Size(200, 60),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "Iniciar Sesion",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
                           ),
                         ),
                       ),
                     ),
-
                   ],
                 ),
               ),
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class DropdownMenu extends StatefulWidget {
-  const DropdownMenu({super.key});
-
-  @override
-  State<DropdownMenu> createState() => _DropdownMenuState();
-}
-
-class _DropdownMenuState extends State<DropdownMenu> {
-  // Initial Selected Value
-  String dropdownvalue = 'Debito/Credito';
-
-  // List of items in our dropdown menu
-  var items = [
-    'Debito/Credito',
-    'Plataforma Digital',
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          DropdownButton<String>(
-            value: dropdownvalue,
-            icon: const Icon(Icons.keyboard_arrow_down),
-            items: items.map((String item) {
-              return DropdownMenuItem<String>(
-                value: item,
-                child: Text(item),
-              );
-            }).toList(),
-            onChanged: (String? newValue) {
-              setState(() {
-                dropdownvalue = newValue!;
-              });
-            },
-          ),
-        ],
       ),
     );
   }
