@@ -32,19 +32,22 @@ class _LoginPage extends State<LoginPage> {
       // If the server did return a 200 OK response,
       // then parse the JSON.
       print(User.fromJson(jsonDecode(response.body)));
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MyHomePage(),
+        ),
+      );
       return User.fromJson(jsonDecode(response.body));
+      
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       throw Exception('Failed to load login');
     }
   }
-  // Navigator.pushReplacement(
-  //   context,
-  //   MaterialPageRoute(
-  //     builder: (context) => MyHomePage(),
-  //   ),
-  // );
+ 
   //llamada a backend
 
   @override
