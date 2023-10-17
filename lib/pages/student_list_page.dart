@@ -20,7 +20,23 @@ class _StudentListPageState extends State<StudentListPage> {
       ),
       body: ListView(
         children: [
-          _createEditButton(),
+          Row(children: [
+            _createEditButton(),
+            SizedBox(width: 100),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                fixedSize: Size(150, 20),
+                backgroundColor: Theme.of(context)
+                    .colorScheme
+                    .primary, // set the background color here
+                foregroundColor: Colors.white, // set the text color here
+              ),
+              onPressed: () {
+                _submitForm(context);
+              },
+              child: Text('Enviar'),
+            )
+          ]),
           _createDataTable(),
           SizedBox(
             height: 10,
@@ -122,7 +138,7 @@ class _StudentListPageState extends State<StudentListPage> {
         SizedBox(
           width: 10,
         ),
-        Text('Modificar Notas')
+        Text('Modificar Notas', style: TextStyle(fontSize: 15))
       ],
     );
   }
@@ -140,4 +156,12 @@ List<Map> getLongestNotes(List<Map> list) {
     }
   }
   return longestNotes;
+}
+
+_submitForm(BuildContext context) async {
+  await Future.delayed(Duration(seconds: 1));
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text('Cargado correctamente'),
+    backgroundColor: Colors.green,
+  ));
 }

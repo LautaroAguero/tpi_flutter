@@ -1,7 +1,7 @@
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tpi_flutter/pages/grades_page.dart';
+import 'package:tpi_flutter/pages/managment_page.dart';
 import 'package:tpi_flutter/pages/payment_page.dart';
 import 'package:tpi_flutter/pages/schedules_pages.dart';
 import 'package:tpi_flutter/pages/subjects_page.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
-        title: 'Namer App',
+        title: 'EducarApp',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Color(0x00234262)),
@@ -29,25 +29,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyAppState extends ChangeNotifier {
-  var current = WordPair.random();
-
-  void getNext() {
-    current = WordPair.random();
-    notifyListeners();
-  }
-
-  var favorites = <WordPair>[];
-
-  void toggleFavorite() {
-    if (favorites.contains(current)) {
-      favorites.remove(current);
-    } else {
-      favorites.add(current);
-    }
-    notifyListeners();
-  }
-}
+class MyAppState extends ChangeNotifier {}
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -76,6 +58,9 @@ class _MyHomePageState extends State<MyHomePage> {
       case 4:
         page = SubjectPage();
         break;
+      case 5:
+        page = ManagementPage();
+        break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -86,10 +71,11 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             SafeArea(
               child: NavigationRail(
-                extended: constraints.maxWidth >= 600,
+                minExtendedWidth: 180,
+                extended: constraints.maxWidth >= 800,
                 destinations: [
                   NavigationRailDestination(
-                    icon: Icon(Icons.home),
+                    icon: Icon(Icons.home_outlined),
                     label: Text('Home'),
                   ),
                   NavigationRailDestination(
@@ -97,16 +83,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     label: Text('Pagos'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.book),
+                    icon: Icon(Icons.book_outlined),
                     label: Text('Horarios'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.grade),
+                    icon: Icon(Icons.grade_outlined),
                     label: Text('Notas'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.subject),
+                    icon: Icon(Icons.subject_outlined),
                     label: Text('Materias'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.manage_accounts_outlined),
+                    label: Text('Gestion'),
                   ),
                 ],
                 selectedIndex: selectedIndex,

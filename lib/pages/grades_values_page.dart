@@ -30,7 +30,7 @@ class GradesValuesPage extends StatelessWidget {
                 return Card(
                   child: ListTile(
                     title: Text(
-                      '${grades[index]['instancia']} ${grades[index]['numero']}}',
+                      '${grades[index]['instancia']} ${grades[index]['numero']}',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     trailing: Text(
