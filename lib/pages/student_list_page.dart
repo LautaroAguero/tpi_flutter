@@ -15,6 +15,10 @@ class _StudentListPageState extends State<StudentListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.picture_as_pdf),
+      ),
       appBar: AppBar(
         title: const Text('Lista de Alumnos'),
       ),
@@ -161,7 +165,7 @@ List<Map> getLongestNotes(List<Map> list) {
 _submitForm(BuildContext context) async {
   await Future.delayed(Duration(seconds: 1));
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    content: Text('Cargado correctamente'),
+    content: Text('Notas editadas correctamente'),
     backgroundColor: Colors.green,
   ));
 }

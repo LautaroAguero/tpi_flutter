@@ -8,6 +8,10 @@ class GradesValuesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.picture_as_pdf),
+      ),
       appBar: AppBar(title: Text(heroTag)),
       body: Column(
         children: [

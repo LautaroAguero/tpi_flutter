@@ -169,25 +169,11 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   _submitForm(BuildContext context) async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text('Cargado correctamente'),
       backgroundColor: Colors.green,
     ));
-  }
-
-  String? _validateComprobante(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Por favor ingrese el número de comprobante';
-    }
-    return null;
-  }
-
-  String? _validateMonto(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Por favor ingrese el monto';
-    }
-    return null;
   }
 
   void _showIncompleteFieldsDialog(BuildContext context) {
