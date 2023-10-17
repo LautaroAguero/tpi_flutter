@@ -16,6 +16,10 @@ class _AllStudentsPageState extends State<StudentsPerDebtPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.picture_as_pdf),
+      ),
       appBar: AppBar(
         title: const Text('Alumnos con deuda'),
       ),

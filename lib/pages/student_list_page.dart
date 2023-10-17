@@ -15,6 +15,10 @@ class _StudentListPageState extends State<StudentListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.picture_as_pdf),
+      ),
       appBar: AppBar(
         title: const Text('Lista de Alumnos'),
       ),

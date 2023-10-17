@@ -176,20 +176,6 @@ class _PaymentPageState extends State<PaymentPage> {
     ));
   }
 
-  String? _validateComprobante(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Por favor ingrese el número de comprobante';
-    }
-    return null;
-  }
-
-  String? _validateMonto(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Por favor ingrese el monto';
-    }
-    return null;
-  }
-
   void _showIncompleteFieldsDialog(BuildContext context) {
     List<String> incompleteFields = [];
     if (_comprobante.isEmpty) {

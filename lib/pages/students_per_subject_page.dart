@@ -62,8 +62,12 @@ class _StudentsPerSubjectPage extends State<StudentsPerSubjectPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.picture_as_pdf),
+      ),
       appBar: AppBar(
-        title: const Text('Lista de Estudiantes'),
+        title: const Text('Estudiantes por Materias'),
       ),
       body: ListView(
         children: _createDataView(),
@@ -73,7 +77,7 @@ class _StudentsPerSubjectPage extends State<StudentsPerSubjectPage> {
 
   List<Widget> _createDataView() {
     List<Widget> dataView = [];
-    subjects.forEach((subject) {
+    for (var subject in subjects) {
       dataView.add(Padding(
         padding: const EdgeInsets.all(10),
         child: Text(
@@ -88,7 +92,7 @@ class _StudentsPerSubjectPage extends State<StudentsPerSubjectPage> {
       dataView.add(SizedBox(
         height: 30,
       ));
-    });
+    }
     return dataView;
   }
 
@@ -116,13 +120,13 @@ class _StudentsPerSubjectPage extends State<StudentsPerSubjectPage> {
   List<DataRow> _generateRows(List<Map<String, dynamic>> students) {
     int order = 1;
     List<DataRow> rows = [];
-    students.forEach((student) {
+    for (var student in students) {
       List<DataCell> cells = [
         DataCell(Text('${order++}')),
         DataCell(Text(student['nombre'])),
       ];
       rows.add(DataRow(cells: cells));
-    });
+    }
     return rows;
   }
 }
