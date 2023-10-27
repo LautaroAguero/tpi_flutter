@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:tpi_flutter/main.dart';
 import 'package:http/http.dart' as http;
@@ -14,6 +15,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   Future<User?> signUserIn() async {
     final response = await http.post(
       Uri.parse('https://tpi-metodologia-grupo-3-2023.onrender.com/login'),
@@ -21,27 +25,39 @@ class _LoginPage extends State<LoginPage> {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        'email': 'jeremias4@gmail.com',
-        'password': '123456'
+        'email': _emailController.text,
+        'password': _passwordController.text,
       }),
     );
 
     if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      print(User.fromJson(jsonDecode(response.body)));
+      Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+      User user = User.fromJson(jsonResponse['user']);
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => MyHomePage(),
+          builder: (context) => MyHomePage(user: user),
         ),
       );
-      return User.fromJson(jsonDecode(response.body));
+      return user;
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load login');
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Row(
+            children: [
+              Icon(
+                size: 40,
+                Icons.warning,
+                color: Colors.redAccent,
+              ),
+              SizedBox(width: 20),
+              Text('Error al iniciar sesion'),
+            ],
+          ),
+          // ignore: use_build_context_synchronously
+          backgroundColor: Theme.of(context).colorScheme.error));
+      return null;
     }
   }
 
@@ -72,21 +88,35 @@ class _LoginPage extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Iniciar Sesion',
+                          'Bienvenido de vuelta',
                           style: Theme.of(context).textTheme.headlineLarge,
                         ),
                       ],
                     ),
-                    SizedBox(height: 60),
+
+                    Container(
+                      alignment: Alignment.center,
+                      child: SizedBox(
+                        width: 230,
+                        height: 230,
+                        child: ClipOval(
+                          child: SvgPicture.asset(
+                            'assets/brandIcon.svg',
+                            semanticsLabel: 'Educar Logo',
+                          ),
+                        ),
+                      ),
+                    ),
 
                     TextFormField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(), labelText: 'Email'),
                       keyboardType: TextInputType.emailAddress,
                     ),
-                    const SizedBox(height: 20),
-
+                    SizedBox(height: 20),
                     TextFormField(
+                      controller: _passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -94,10 +124,7 @@ class _LoginPage extends State<LoginPage> {
                       ),
                       keyboardType: TextInputType.visiblePassword,
                     ),
-
-                    const SizedBox(height: 10),
-
-                    const SizedBox(height: 25),
+                    SizedBox(height: 35),
                     // sign in button
                     ElevatedButton(
                       onPressed: signUserIn,
@@ -105,7 +132,7 @@ class _LoginPage extends State<LoginPage> {
                         backgroundColor: Theme.of(context).colorScheme.primary,
                         minimumSize: Size(200, 60),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
                           "Iniciar Sesion",
                           style: TextStyle(

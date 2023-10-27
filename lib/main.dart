@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tpi_flutter/models/user.dart';
 import 'package:tpi_flutter/pages/grades_page.dart';
 import 'package:tpi_flutter/pages/login_page.dart';
 import 'package:tpi_flutter/pages/managment_page.dart';
 import 'package:tpi_flutter/pages/payment_page.dart';
+import 'package:tpi_flutter/pages/presentation_page.dart';
 import 'package:tpi_flutter/pages/schedules_pages.dart';
 import 'package:tpi_flutter/pages/subjects_page.dart';
 
@@ -33,6 +35,10 @@ class MyApp extends StatelessWidget {
 class MyAppState extends ChangeNotifier {}
 
 class MyHomePage extends StatefulWidget {
+  final User user;
+
+  const MyHomePage({required this.user});
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -45,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = Placeholder();
+        page = PresentationPage(user: widget.user);
         break;
       case 1:
         page = PaymentPage();
