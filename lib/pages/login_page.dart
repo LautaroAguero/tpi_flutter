@@ -33,6 +33,7 @@ class _LoginPage extends State<LoginPage> {
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonResponse = jsonDecode(response.body);
       User user = User.fromJson(jsonResponse['user']);
+      print('${user.name} tiene rol de: ${user.role}');
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,

@@ -76,45 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Scaffold(
         body: Row(
           children: [
-            SafeArea(
-              child: NavigationRail(
-                minExtendedWidth: 180,
-                extended: constraints.maxWidth >= 800,
-                destinations: [
-                  NavigationRailDestination(
-                    icon: Icon(Icons.home_outlined),
-                    label: Text('Home'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.payment),
-                    label: Text('Pagos'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.book_outlined),
-                    label: Text('Horarios'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.grade_outlined),
-                    label: Text('Notas'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.subject_outlined),
-                    label: Text('Materias'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.manage_accounts_outlined),
-                    label: Text('Gestion'),
-                  ),
-                ],
-                selectedIndex: selectedIndex,
-                onDestinationSelected: (value) {
-                  print('selected: $value');
-                  setState(() {
-                    selectedIndex = value;
-                  });
-                },
-              ),
-            ),
+            SafeArea(child: constructView(constraints)),
             Expanded(
               child: Container(
                 color: Theme.of(context).colorScheme.primaryContainer,
@@ -125,5 +87,171 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
     });
+  }
+
+  NavigationRail constructView(constraints) {
+    NavigationRail sideNav;
+    switch (widget.user.role) {
+      case 'Estudiante':
+      case 'Padre':
+        List<int> visibleDestination = [0, 1, 2, 3];
+        selectedIndex = visibleDestination[0];
+        sideNav = NavigationRail(
+          minExtendedWidth: 180,
+          extended: constraints.maxWidth >= 800,
+          destinations: [
+            NavigationRailDestination(
+              icon: Icon(Icons.home_outlined),
+              label: Text('Home'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.payment),
+              label: Text('Pagos'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.book_outlined),
+              label: Text('Horarios'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.grade_outlined),
+              label: Text('Notas'),
+            )
+          ],
+          selectedIndex: selectedIndex,
+          onDestinationSelected: (value) {
+            print('selected: $value');
+            print('visible selected: ${visibleDestination[value]}');
+            setState(() {
+              selectedIndex = visibleDestination[value];
+            });
+          },
+        );
+        break;
+      case 'Profesor':
+        List<int> visibleDestination = [0, 1, 4];
+        selectedIndex = visibleDestination[0];
+        sideNav = NavigationRail(
+          minExtendedWidth: 180,
+          extended: constraints.maxWidth >= 800,
+          destinations: [
+            NavigationRailDestination(
+              icon: Icon(Icons.home_outlined),
+              label: Text('Home'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.payment),
+              label: Text('Pagos'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.subject_outlined),
+              label: Text('Materias'),
+            ),
+          ],
+          selectedIndex: selectedIndex,
+          onDestinationSelected: (value) {
+            print('selected: $value');
+            setState(() {
+              selectedIndex = visibleDestination[value];
+            });
+          },
+        );
+        break;
+      case 'Personal':
+        List<int> visibleDestination = [0, 1, 5];
+        selectedIndex = visibleDestination[0];
+        sideNav = NavigationRail(
+          minExtendedWidth: 180,
+          extended: constraints.maxWidth >= 800,
+          destinations: [
+            NavigationRailDestination(
+              icon: Icon(Icons.home_outlined),
+              label: Text('Home'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.payment),
+              label: Text('Pagos'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.manage_accounts_outlined),
+              label: Text('Gestion'),
+            )
+          ],
+          selectedIndex: selectedIndex,
+          onDestinationSelected: (value) {
+            print('selected: $value');
+            print('visible selected: ${visibleDestination[value]}');
+            setState(() {
+              selectedIndex = visibleDestination[value];
+            });
+          },
+        );
+        break;
+      case 'Autoridad':
+        List<int> visibleDestination = [0, 1, 2, 3, 4, 5];
+        sideNav = NavigationRail(
+          minExtendedWidth: 180,
+          extended: constraints.maxWidth >= 800,
+          destinations: [
+            NavigationRailDestination(
+              icon: Icon(Icons.home_outlined),
+              label: Text('Home'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.payment),
+              label: Text('Pagos'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.book_outlined),
+              label: Text('Horarios'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.grade_outlined),
+              label: Text('Notas'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.subject_outlined),
+              label: Text('Materias'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.manage_accounts_outlined),
+              label: Text('Gestion'),
+            ),
+          ],
+          selectedIndex: visibleDestination[selectedIndex],
+          onDestinationSelected: (value) {
+            print('selected: $value');
+            print('visible selected: ${visibleDestination[value]}');
+            setState(() {
+              selectedIndex = visibleDestination[value];
+            });
+          },
+        );
+        break;
+
+      default:
+        List<int> visibleDestination = [0];
+        selectedIndex = visibleDestination[0];
+        sideNav = sideNav = NavigationRail(
+          minExtendedWidth: 180,
+          extended: constraints.maxWidth >= 800,
+          destinations: [
+            NavigationRailDestination(
+              icon: Icon(Icons.home_outlined),
+              label: Text('Home'),
+            )
+          ],
+          selectedIndex: visibleDestination[selectedIndex],
+          onDestinationSelected: (value) {
+            print('selected: $value');
+            print('visible selected: ${visibleDestination[value]}');
+            setState(() {
+              selectedIndex = visibleDestination[value];
+            });
+          },
+        );
+        break;
+    }
+
+    return sideNav;
   }
 }
