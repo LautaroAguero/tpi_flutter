@@ -18,6 +18,8 @@ class _AllStudentsPageState extends State<StudentsPerDebtPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
+        foregroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         child: Icon(Icons.picture_as_pdf),
       ),
       appBar: AppBar(

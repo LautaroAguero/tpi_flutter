@@ -14,9 +14,21 @@ class _StudentListPageState extends State<StudentListPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.students.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Lista de Alumnos'),
+        ),
+        body: Center(
+          child: Text('No hay alumnos registrados'),
+        ),
+      );
+    }
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
+        foregroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         child: Icon(Icons.picture_as_pdf),
       ),
       appBar: AppBar(

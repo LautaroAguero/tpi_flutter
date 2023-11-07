@@ -90,20 +90,14 @@ class _PaymentPageState extends State<PaymentPage> {
                         style: ElevatedButton.styleFrom(
                           shape: CircleBorder(),
                           padding: EdgeInsets.all(20),
-                          backgroundColor: Theme.of(context)
-                              .colorScheme
-                              .background
-                              .withOpacity(0.6),
-                          foregroundColor: Theme.of(context)
-                              .colorScheme
-                              .onBackground
-                              .withOpacity(0.2),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
                         ),
                         onPressed: () {},
                         child: Icon(
                           Icons.picture_as_pdf,
                           size: 50,
-                          color: Theme.of(context).colorScheme.primary,
+                          color: Colors.white,
                         ),
                       ),
                       Padding(
@@ -129,7 +123,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                 ),
                                 SizedBox(width: 10),
                                 Text(
-                                  'Los pagos en efectivo se realizan en la tesoreria de la facultad',
+                                  'Los pagos en efectivo se realizan en la tesoreria de la institucion',
                                   style:
                                       Theme.of(context).textTheme.headlineLarge,
                                 ),

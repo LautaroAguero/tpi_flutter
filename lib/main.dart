@@ -57,13 +57,13 @@ class _MyHomePageState extends State<MyHomePage> {
         page = PaymentPage();
         break;
       case 2:
-        page = SchedulesPage();
+        page = SchedulesPage(user: widget.user);
         break;
       case 3:
         page = GradesPage();
         break;
       case 4:
-        page = SubjectPage();
+        page = SubjectPage(user: widget.user);
         break;
       case 5:
         page = ManagementPage();
