@@ -14,17 +14,30 @@ class PresentationPage extends StatelessWidget {
       body: Center(
         child: Column(children: [
           SizedBox(height: 60),
-          Text(
-            'Bienvenido de vuelta ${user.name}',
-            style: Theme.of(context).textTheme.displaySmall,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Bienvenido de vuelta ',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                Text('${user.name}',
+                    style: Theme.of(context).textTheme.headlineSmall),
+              ],
+            ),
           ),
           SizedBox(height: 50),
           Container(
+            width: 300,
+            height: 300,
             alignment: Alignment.center,
             child: ClipOval(
               child: SvgPicture.asset(
                 'assets/brandIcon.svg',
                 semanticsLabel: 'Educar Logo',
+                fit: BoxFit.cover,
               ),
             ),
           )

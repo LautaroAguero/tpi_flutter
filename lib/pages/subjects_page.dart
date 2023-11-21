@@ -318,10 +318,10 @@ class _SubjectPageState extends State<SubjectPage> {
                             children: [
                               Text(
                                 snapshot.data[index].name,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                              SizedBox(
+                                height: 10,
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -332,9 +332,9 @@ class _SubjectPageState extends State<SubjectPage> {
                                       FittedBox(
                                         child: Text(
                                           'Aula ${snapshot.data[index].classroom}',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                          ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium,
                                         ),
                                       ),
                                       SizedBox(
@@ -343,15 +343,19 @@ class _SubjectPageState extends State<SubjectPage> {
                                       FittedBox(
                                         child: Text(
                                           snapshot.data[index].schedule,
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                          ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium,
                                         ),
                                       ),
                                     ],
                                   ),
-                                  Flexible(
-                                    flex: 1,
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  SizedBox(
+                                    height: 40,
+                                    width: 100,
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                           backgroundColor: Theme.of(context)
@@ -369,10 +373,9 @@ class _SubjectPageState extends State<SubjectPage> {
                                       },
                                       child: Text(
                                         'Lista de Alumnos',
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall,
                                       ),
                                     ),
                                   ),

@@ -38,10 +38,10 @@ class _StudentListPageState extends State<StudentListPage> {
         children: [
           Row(children: [
             _createEditButton(),
-            SizedBox(width: 100),
+            SizedBox(width: 70),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                fixedSize: Size(150, 20),
+                fixedSize: Size(100, 20),
                 backgroundColor: Theme.of(context)
                     .colorScheme
                     .primary, // set the background color here
@@ -53,10 +53,8 @@ class _StudentListPageState extends State<StudentListPage> {
               child: Text('Enviar'),
             )
           ]),
-          _createDataTable(),
-          SizedBox(
-            height: 10,
-          ),
+          SingleChildScrollView(
+              scrollDirection: Axis.horizontal, child: _createDataTable()),
         ],
       ),
     );

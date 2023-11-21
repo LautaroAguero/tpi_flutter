@@ -32,126 +32,147 @@ class _PaymentPageState extends State<PaymentPage> {
             height: 630,
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.all(50),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.payment,
-                            size: 50,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            'Nuevo Pago',
-                            style: Theme.of(context).textTheme.headlineLarge,
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 20),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Selecciona Metodo de pago',
-                              style: Theme.of(context).textTheme.bodyMedium),
-                          SizedBox(width: 10),
-                          DropdownMenu()
-                        ],
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'N° de Comprobante'),
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(), labelText: 'Monto'),
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly
+                padding: const EdgeInsets.all(20),
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.payment,
+                              size: 50,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              'Nuevo Pago',
+                              style: Theme.of(context).textTheme.headlineMedium,
+                            ),
                           ],
                         ),
-                      ),
-                      SizedBox(height: 10),
-                      Text('Adjuntar Comprobante',
-                          style: Theme.of(context).textTheme.bodyMedium),
-                      SizedBox(height: 10),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: CircleBorder(),
-                          padding: EdgeInsets.all(20),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
+                        SizedBox(height: 20),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Selecciona Metodo de pago',
+                                style: Theme.of(context).textTheme.bodySmall),
+                            SizedBox(width: 10),
+                            DropdownMenu()
+                          ],
                         ),
-                        onPressed: () {},
-                        child: Icon(
-                          Icons.picture_as_pdf,
-                          size: 50,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: FittedBox(
-                            child: Card(
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: Theme.of(context).colorScheme.error,
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                        SizedBox(
+                          height: 50,
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'N° de Comprobante'),
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  size: 40,
-                                  Icons.warning,
-                                  color: Colors.redAccent,
-                                ),
-                                SizedBox(width: 10),
-                                Text(
-                                  'Los pagos en efectivo se realizan en la tesoreria de la institucion',
-                                  style:
-                                      Theme.of(context).textTheme.headlineLarge,
-                                ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 20),
+                          child: SizedBox(
+                            height: 50,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Monto'),
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
                               ],
                             ),
                           ),
-                        )),
-                      ),
-                      SizedBox(height: 35),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: Size(150, 20),
-                          backgroundColor: Theme.of(context)
-                              .colorScheme
-                              .primary, // set the background color here
-                          foregroundColor:
-                              Colors.white, // set the text color here
                         ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            _submitForm(context);
-                          } else {
-                            _showIncompleteFieldsDialog(context);
-                          }
-                        },
-                        child: Text('Enviar'),
-                      ),
-                    ],
+                        SizedBox(height: 20),
+                        Text('Adjuntar Comprobante',
+                            style: Theme.of(context).textTheme.bodyMedium),
+                        SizedBox(height: 10),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: CircleBorder(),
+                            padding: EdgeInsets.all(20),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.primary,
+                          ),
+                          onPressed: () {},
+                          child: Icon(
+                            Icons.picture_as_pdf,
+                            size: 25,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: FittedBox(
+                              child: Card(
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                color: Theme.of(context).colorScheme.error,
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    size: 30,
+                                    Icons.warning,
+                                    color: Colors.redAccent,
+                                  ),
+                                  SizedBox(width: 10),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        'Los pagos en efectivo se realizan',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge,
+                                      ),
+                                      Text(
+                                        'en la tesoreria de la institucion',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge,
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )),
+                        ),
+                        SizedBox(height: 15),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            fixedSize: Size(150, 20),
+                            backgroundColor: Theme.of(context)
+                                .colorScheme
+                                .primary, // set the background color here
+                            foregroundColor:
+                                Colors.white, // set the text color here
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _submitForm(context);
+                            } else {
+                              _showIncompleteFieldsDialog(context);
+                            }
+                          },
+                          child: Text('Enviar'),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -231,7 +252,10 @@ class _DropdownMenuState extends State<DropdownMenu> {
             items: items.map((String item) {
               return DropdownMenuItem<String>(
                 value: item,
-                child: Text(item),
+                child: Text(
+                  item,
+                  style: TextStyle(fontSize: 15),
+                ),
               );
             }).toList(),
             onChanged: (String? newValue) {
